@@ -14,7 +14,7 @@ const ContactForm = (props) => {
 
               {/* ***** need to add the formspree url path.  Signing up with the AMC gmail account */}
 
-              <form action="https://formspree.io/" method="POST">
+              <form action="https://formspree.io/mgenlwbr" method="POST">
                 <div className="form-group">
                   <label htmlFor="name">Name</label>
                   <input
