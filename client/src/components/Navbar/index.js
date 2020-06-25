@@ -54,17 +54,6 @@ const Navbar = (props) => {
               Events
             </Link>
           </li>
-
-          {/* <li className="nav-item">
-            <Link
-              className="nav-link disabled"
-              to="#"
-              tabIndex="-1"
-              aria-disabled="true"
-            >
-              Disabled
-            </Link>
-          </li> */}
         </ul>
       </div>
     </nav>
