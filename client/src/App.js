@@ -9,9 +9,11 @@ import Footer from "../src/components/Footer";
 // PAGES
 import Home from "./pages/Home";
 import Contact from "./pages/Contact";
+import PhotoGallery from "./pages/Gallery";
 
 // root css
 import "./App.css";
+
 
 function App() {
   return (
@@ -20,7 +22,7 @@ function App() {
         <Navbar />
         <Switch>
           <Route exact path={["/"]} component={Home} />
-
+          <Route exact path={["/gallery"]} component={PhotoGallery} />
           <Route exact path={["/contact"]} component={Contact} />
         </Switch>
         <Footer />
