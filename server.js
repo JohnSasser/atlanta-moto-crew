@@ -1,15 +1,14 @@
-const cors = require("cors");
-let express = require("express");
-const fs = require("fs");
+// const cors = require("cors");
+const express = require("express");
 const path = require("path");
-const bodyParser = require("body-parser")
-// const mongoose = require("mongoose");
-const logger = require('morgan');
+const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
 
 // api routes
-const apiRoutes = require("./routes/apiRoutes")
+const apiRoutes = require("./routes/apiRoutes");
+const { request } = require("http");
 
-const PORT = process.env.PORT || 3002;
+const PORT = process.env.PORT || 3001;
 const app = express();
 
 // Serve up static assets (usually on heroku)
@@ -21,29 +20,54 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "public")));
 }
 
-// app.use(
-//   cors({
-//     origin: ["http://localhost:8080"],
-//     credentials: true,
-//   })
-// );
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+// app.use(cors());
+// {
+//   origin: ["http://localhost:3000"],
+//   credentials: true,
+// }
+
+// CUSTOM PROXY ROUTE FOR HEADERS - CORS WAS NOT WORKING;
+// app.use((req, res, next) => {
+//   res.header('Access-Control-Allow-Origin', '*');
+//   next();
+// });
+
+// app.get('/api/gallery/images', (req, res) => {
+//   request(
+//     { url: 'https://api.cloudinary.com/v1_1/di0f6kaus/resources/image/tags/2sTM'},
+//     (error, response, body) => {
+//       if (error || response.status !== 200) {
+//         return res.status(500).json({
+//           type: error,
+//           message: error.message
+//         });
+//       }
+//       console.log(req);
+//       res.json(JSON.parse(body));
+//     }
+//   )
+// });
+
 // API ROUTES FOR REQUESTS
-app.use(apiRoutes)
+app.use(apiRoutes);
 
 // Send every request to the React app
 app.get("*", function (req, res) {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
-// mongoose.connect(
-//   process.env.MONGODB_URI ||
-//   "mongodDB://localhost/atlantamotocrewdb",
+mongoose.connect(
+  process.env.MONGODB_URI || "mongodDB://localhost/atlantamotocrewdb"
+);
 
-// );
 app.listen(PORT, function () {
   // console.log(`🌎 ==> API server now on port ${PORT}!`);
+});
+
+// Error Handling
+app.use((req, res, next) => {
+  next(createError(404));
 });
