@@ -28,8 +28,6 @@ app.use(cors());
 //   origin: ["http://localhost:3000"],
 //   credentials: true,
 // }
-const BASE_URL = 'https://api.cloudinary.com/v1_1/di0f6kaus/resources/image'
-
 
 // CUSTOM PROXY ROUTE FOR HEADERS - CORS WAS NOT WORKING;
 app.use((req, res, next) => {
@@ -37,23 +35,22 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/api/gallery/images', (req, res) => {
-  request(
-    { url: BASE_URL },
-    (error, response, body) => {
-      if (error || response.status !== 200) {
-        return res.status(500).json({
-          type: error,
-          message: error.message
-        });
-      }
-      console.log(req);
-      res.json(JSON.parse(body));
-    }
-  )
-});
+// app.get('/api/gallery/images', (req, res) => {
+//   request(
+//     { url: BASE_URL },
+//     (error, response, body) => {
+//       if (error || response.status !== 200) {
+//         return res.status(500).json({
+//           type: error,
+//           message: error.message
+//         });
+//       }
+//       console.log(req);
+//       res.json(JSON.parse(body));
+//     }
+//   )
+// });
 
-setImagePublicIDs(imagePublicIDs => [...imagePublicIDs, public_id])
 // API ROUTES FOR REQUESTS
 // app.use(apiRoutes);
 
