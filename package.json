@@ -11,7 +11,6 @@
     "client": "cd client && npm run start",
     "server": "node-env-run server.js --exec nodemon | pino-colada",
     "seed": "node scripts/seedDB.js",
-    "install": "cd client && npm install",
     "build": "cd client && npm run build",
     "heroku-postbuild": "npm run build"
   },
@@ -33,6 +32,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-pino-logger": "^5.0.0",
+    "mongoose": "^5.9.20",
     "node-env-run": "^3.0.2"
   }
 }
