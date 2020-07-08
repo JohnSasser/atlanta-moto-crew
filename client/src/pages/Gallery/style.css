@@ -1,0 +1,9 @@
+.image{
+    justify-content: space-around;
+}
+
+Image {
+    display: block;
+    height: 200px;
+    width: 300px;
+}
