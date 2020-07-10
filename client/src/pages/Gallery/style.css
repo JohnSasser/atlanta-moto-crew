@@ -1,9 +1,15 @@
-.image{
-    justify-content: space-around;
+
+.responsive {
+    margin-bottom: 80px;
+    float: left;
+    margin: 0 auto;
+    justify-content: center;
+    text-align: center;
 }
 
-Image {
-    display: block;
-    height: 200px;
-    width: 300px;
+.gallery {
+    display: flex;
+    height: 100%;
+    text-align: center;
+    margin-bottom: 80px;
 }
