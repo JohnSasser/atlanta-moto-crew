@@ -1,7 +1,6 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Image,
-  Video,
   Transformation,
   CloudinaryContext,
 } from "cloudinary-react";
@@ -38,43 +37,47 @@ const PhotoGallery = (props) => {
 
   // console.log("imagePublicIds", galleryImages);
 
-  const images = galleryImages.map((image) => {
-    return <Image publicId={image.public_id} height={195} width={300} />;
-  });
-
   return (
-    <div className='container'>
-      {/* ***** BUILD A JUMBOTRON COMPONENT FOR THE TITLE HEADER */}
-      <h1> #2sTM Gallery</h1>
-      <div className='gallery'>
-        <CloudinaryContext cloudName="di0f6kaus">
-          {galleryImages.map((data) => {
-            // console.log("data in the galleryImages.map", data)
-            if (data.public_id) {
-              return (
-                <div className="responsive row justify-content-around" key={data.public_id}>
-                  <div className="img d-inline-flex m-2 col-8" style={{marginBottom: '80px'}}>
-                    <a
-                      target="_blank"
-                      href={`https://res.cloudinary.com/di0f6kaus/image/upload/${data.public_id}.jpg`}
+    <div className="container">
+      {" "}
+      <div className="clearfix">
+        {/* ***** BUILD A JUMBOTRON COMPONENT FOR THE TITLE HEADER */}
+        <h1> #2sTM Gallery</h1>
+        <div className="gallery">
+          <CloudinaryContext cloudName="di0f6kaus">
+            {galleryImages.map((data) => {
+              // console.log("data in the galleryImages.map", data)
+              if (data.public_id) {
+                return (
+                  <div
+                    className="responsive row justify-content-around"
+                    key={data.public_id}
+                  >
+                    <div
+                      className="img d-inline-flex m-2 col-9"
+                      style={{ marginBottom: "80px" }}
                     >
-                      <Image publicId={data.public_id}>
-                        <Transformation
-                          crop="scale"
-                          width="300"
-                          height="200"
-                          dpr="auto"
-                          responsive_placeholder="blank"
-                        />
-                      </Image>
-                    </a>
+                      <a
+                        target="_blank"
+                        href={`https://res.cloudinary.com/di0f6kaus/image/upload/${data.public_id}.jpg`}
+                      >
+                        <Image publicId={data.public_id}>
+                          <Transformation
+                            crop="scale"
+                            width="300"
+                            height="200"
+                            dpr="auto"
+                            responsive_placeholder="blank"
+                          />
+                        </Image>
+                      </a>
+                    </div>
                   </div>
-                </div>
-              );
-            }
-          })}
-        </CloudinaryContext>
-        {/* <div className="clearfix"></div> */}
+                );
+              }
+            })}
+          </CloudinaryContext>
+        </div>
       </div>
     </div>
   );
