@@ -1,0 +1,15 @@
+
+.responsive {
+    margin-bottom: 80px;
+    float: left;
+    margin: 0 auto;
+    justify-content: center;
+    text-align: center;
+}
+
+.gallery {
+    display: flex;
+    height: 100%;
+    text-align: center;
+    margin-bottom: 80px;
+}

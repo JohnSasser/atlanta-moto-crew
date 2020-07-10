@@ -1,29 +1,14 @@
-import React, { useState, useCallback, useEffect } from "react";
-import Gallery from "react-photo-gallery";
-import Carousel, { Modal, ModalGateway } from "react-images";
+import React, { useState, useEffect } from "react";
 import {
   Image,
-  Video,
   Transformation,
   CloudinaryContext,
 } from "cloudinary-react";
 import axios from "axios";
-import { photos } from "./photos";
+import "./style.css";
 
 const PhotoGallery = (props) => {
-  const [imagePublicIDs, setImagePublicIDs] = useState([{}]);
-  const [currentImage, setCurrentImage] = useState(0);
-  const [viewerIsOpen, setViewerIsOpen] = useState(false);
-
-  const openLightbox = useCallback((event, { photo, index }) => {
-    setCurrentImage(index);
-    setViewerIsOpen(true);
-  }, []);
-
-  const closeLightbox = () => {
-    setCurrentImage(0);
-    setViewerIsOpen(false);
-  };
+  const [galleryImages, setGalleryImages] = useState([{}]);
 
   useEffect(() => {
     // console.log("inside useEffect() - gallery.js");
@@ -37,51 +22,63 @@ const PhotoGallery = (props) => {
         // console.log("imageList:", imageList);
 
         for (let i = 0; i < imageList.length; i++) {
-          let public_id = imageList[i].public_id;
+          let imgObject = {
+            public_id: imageList[i].public_id,
+            // width: 300,
+            // height: 150,
+            // src: "",
+          };
           // Setting the array of publicId's for CloudinaryContext Images;
-          setImagePublicIDs((imagePublicIDs) => [
-            {
-              ...imagePublicIDs,
-              public_id: public_id,
-              width: 8,
-              height: 6,
-              src: "",
-            },
-          ]);
+          setGalleryImages((galleryImages) => [...galleryImages, imgObject]);
         }
       })
       .catch((err) => console.log(err));
   }, []);
 
-  console.log(imagePublicIDs);
+  // console.log("imagePublicIds", galleryImages);
 
   return (
-    <div>
-      <CloudinaryContext cloudName="di0f6kaus">
-        {/* <div>
-          <Image publicId="amc-gallary/ronnie2_a0sogs" width="400" />
+    <div className="container">
+      {" "}
+      <div className="clearfix">
+        {/* ***** BUILD A JUMBOTRON COMPONENT FOR THE TITLE HEADER */}
+        <h1> #2sTM Gallery</h1>
+        <div className="gallery">
+          <CloudinaryContext cloudName="di0f6kaus">
+            {galleryImages.map((data) => {
+              // console.log("data in the galleryImages.map", data)
+              if (data.public_id) {
+                return (
+                  <div
+                    className="responsive row justify-content-around"
+                    key={data.public_id}
+                  >
+                    <div
+                      className="img d-inline-flex m-2 col-9"
+                      style={{ marginBottom: "80px" }}
+                    >
+                      <a
+                        target="_blank"
+                        href={`https://res.cloudinary.com/di0f6kaus/image/upload/${data.public_id}.jpg`}
+                      >
+                        <Image publicId={data.public_id}>
+                          <Transformation
+                            crop="scale"
+                            width="300"
+                            height="200"
+                            dpr="auto"
+                            responsive_placeholder="blank"
+                          />
+                        </Image>
+                      </a>
+                    </div>
+                  </div>
+                );
+              }
+            })}
+          </CloudinaryContext>
         </div>
-        <div>
-          <Image publicId="amc-gallary/ronnie_mfwl7i" width="400" />
-        </div>
-        <Image publicId="sample" width="0.5" /> */}
-
-        <Gallery photos={photos} onClick={openLightbox} />
-        <ModalGateway>
-          {viewerIsOpen ? (
-            <Modal onClose={closeLightbox}>
-              <Carousel
-                currentIndex={currentImage}
-                views={photos.map((x) => ({
-                  ...x,
-                  srcset: x.srcSet,
-                  caption: x.title,
-                }))}
-              />
-            </Modal>
-          ) : null}
-        </ModalGateway>
-      </CloudinaryContext>
+      </div>
     </div>
   );
 };
