@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Image,
-  Transformation,
-  CloudinaryContext,
-} from "cloudinary-react";
+import { Image, Transformation, CloudinaryContext } from "cloudinary-react";
 import axios from "axios";
 import "./style.css";
 
@@ -39,10 +35,10 @@ const PhotoGallery = (props) => {
 
   return (
     <div className="container">
-      {" "}
-      <div className="clearfix">
+      
+      {/* <div className="clearfix"> */}
         {/* ***** BUILD A JUMBOTRON COMPONENT FOR THE TITLE HEADER */}
-        <h1> #2sTM Gallery</h1>
+        <h1> Two Stroke Time Machine 2019</h1>
         <div className="gallery">
           <CloudinaryContext cloudName="di0f6kaus">
             {galleryImages.map((data) => {
@@ -54,7 +50,7 @@ const PhotoGallery = (props) => {
                     key={data.public_id}
                   >
                     <div
-                      className="img d-inline-flex m-2 col-9"
+                      className="img d-inline-flex"
                       style={{ marginBottom: "80px" }}
                     >
                       <a
@@ -78,7 +74,7 @@ const PhotoGallery = (props) => {
             })}
           </CloudinaryContext>
         </div>
-      </div>
+      {/* </div> */}
     </div>
   );
 };
