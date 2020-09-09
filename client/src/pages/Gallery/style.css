@@ -1,15 +1,48 @@
-
 .responsive {
-    margin-bottom: 80px;
+    /* margin-bottom: 80px; */
     float: left;
-    margin: 0 auto;
-    justify-content: center;
-    text-align: center;
+    margin: 25px;
 }
 
 .gallery {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
     height: 100%;
-    text-align: center;
-    margin-bottom: 80px;
+    /* text-align: center; */
+    /* margin-bottom: 20px; */
+    /* margin: 0 auto; */
+}
+
+.d-inline-flex {
+    margin: 0 auto;
+    max-width: 100%;
+    /* flex: 100% 100%; */
+}
+
+/*      REMOVED CLEARFIX 
+.clearfix {
+    margin-bottom: 100px;
+} */
+
+@media only screen and (max-width: 600px) {
+    img {
+        right: 10px;
+        height: 220px;
+        width: max-content;
+        margin: 0 auto;
+    }
+
+    h1 {
+        margin-bottom: 25px;
+    }
+
+    .responsive {
+        margin: 0;
+    }
+
+    .d-inline-flex {
+        margin: 0 auto;
+        max-width: 100%;
+    }
 }

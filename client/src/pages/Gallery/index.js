@@ -35,8 +35,8 @@ const PhotoGallery = (props) => {
 
   return (
     <div className="container">
-      {" "}
-      <div className="clearfix">
+      
+      {/* <div className="clearfix"> */}
         {/* ***** BUILD A JUMBOTRON COMPONENT FOR THE TITLE HEADER */}
         <h1> Two Stroke Time Machine 2019</h1>
         <div className="gallery">
@@ -50,7 +50,7 @@ const PhotoGallery = (props) => {
                     key={data.public_id}
                   >
                     <div
-                      className="img d-inline-flex m-2 col-9"
+                      className="img d-inline-flex"
                       style={{ marginBottom: "80px" }}
                     >
                       <a
@@ -74,7 +74,7 @@ const PhotoGallery = (props) => {
             })}
           </CloudinaryContext>
         </div>
-      </div>
+      {/* </div> */}
     </div>
   );
 };
